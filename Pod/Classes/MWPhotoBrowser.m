@@ -136,6 +136,8 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     
+    [self.navigationController.navigationBar setHidden:YES];
+    
     // Validate grid settings
     if (_startOnGrid) _enableGrid = YES;
     if (_enableGrid) {
@@ -1399,11 +1401,17 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
 // If permanent then we don't set timers to hide again
 // Fades all controls on iOS 5 & 6, and iOS 7 controls slide and fade
 - (void)setControlsHidden:(BOOL)hidden animated:(BOOL)animated permanent:(BOOL)permanent {
-    
+//    [self.navigationController.navigationBar setHidden:YES];
+//
+//    [self.navigationController.navigationBar setAlpha:0];
+//    hidden = YES;
+//    return;
+//
     // Force visible
     if (![self numberOfPhotos] || _gridController || _alwaysShowControls)
         hidden = NO;
-    
+
+    hidden = YES;
     // Cancel any timers
     [self cancelControlHiding];
     
@@ -1530,7 +1538,10 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
 - (BOOL)areControlsHidden { return (_toolbar.alpha == 0); }
 - (void)hideControls { [self setControlsHidden:YES animated:YES permanent:NO]; }
 - (void)showControls { [self setControlsHidden:NO animated:YES permanent:NO]; }
-- (void)toggleControls { [self setControlsHidden:![self areControlsHidden] animated:YES permanent:NO]; }
+- (void)toggleControls {
+    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self setControlsHidden:![self areControlsHidden] animated:YES permanent:NO];
+}
 
 #pragma mark - Properties
 

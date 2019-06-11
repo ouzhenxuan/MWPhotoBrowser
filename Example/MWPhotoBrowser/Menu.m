@@ -1121,7 +1121,7 @@
     browser.zoomPhotosToFill = YES;
     browser.enableGrid = enableGrid;
     browser.startOnGrid = startOnGrid;
-    browser.enableSwipeToDismiss = NO;
+    browser.enableSwipeToDismiss = YES;
     browser.autoPlayOnAppear = autoPlayOnAppear;
     [browser setCurrentPhotoIndex:0];
     
